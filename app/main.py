@@ -33,7 +33,7 @@ conn.commit()
 conn.close()
 
 # Cargar el modelo preentrenado
-RUTA_MODELO = "data/advertising_model.pkl"
+RUTA_MODELO = "models/advertising_model.pkl"
 try:
     modelo = joblib.load(RUTA_MODELO)
 except FileNotFoundError:
