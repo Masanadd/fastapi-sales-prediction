@@ -51,13 +51,13 @@ class RegistroIngesta(CaracteristicasPrediccion):
 # Endpoints
 @app.get("/")
 def home():
-    return {"mensaje": "La API del Modelo de Publicidad está funcionando"}
+    return {"message": "La API del Modelo de Publicidad está funcionando"}
 
 @app.post("/predict")
 def predecir_ventas(datos: CaracteristicasPrediccion):
     caracteristicas = np.array([[datos.tv, datos.radio, datos.newspaper]])
     prediccion = modelo.predict(caracteristicas)
-    return {"ventas_predichas": float(prediccion[0])}
+    return {"prediction": float(prediccion[0])}
 
 @app.post("/ingest")
 def ingresar_datos(registros: List[RegistroIngesta]):
@@ -72,7 +72,7 @@ def ingresar_datos(registros: List[RegistroIngesta]):
     
     conn.commit()
     conn.close()
-    return {"mensaje": "Registros almacenados correctamente"}
+    return {"message": "Datos ingresados correctamente"}
 
 @app.post("/retrain")
 def reentrenar_modelo():
@@ -96,7 +96,7 @@ def reentrenar_modelo():
     global modelo
     modelo = nuevo_modelo
     
-    return {"mensaje": "El modelo ha sido reentrenado correctamente."}
+    return {"message": "Modelo reentrenado correctamente."}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
